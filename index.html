@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>دهکده نان | سفارش آنلاین</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background: linear-gradient(45deg, #ffcc70, #ff6f91, #d65db1, #845ec2);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+    }
+
+    header img {
+      width: 160px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-top: 10px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff6f91;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .message {
+      margin-top: 15px;
+      color: red;
+      font-weight: bold;
+    }
+
+    .gallery {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .gallery img {
+      width: 100%;
+      max-width: 300px;
+      margin: 10px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .admin-link {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .orders {
+      margin-top: 30px;
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .order-item {
+      background: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .order-item button {
+      margin-top: 10px;
+      background: #d65db1;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #adminPage, #loginPage {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div style="text-align: center; font-family: 'Segoe UI';" >
+ادرس:شهرستان بویین میاندشت ,بلوار امام حسین, جنب فروشگاه فرهنگیان, نان شیر برکت اقای مهدوی
+شماره تماس:09139730748
+  </div>
+  <header>
+    <img src="https://copilot.microsoft.com/th/id/BCO.b63b568e-2b4c-441c-bef9-5e86508d7e6d.png" alt="لوگوی دهکده نان">
+    <h1>سفارش آنلاین نان</h1>
+  </header>
+
+  <div class="container" id="mainPage">
+    <form id="breadForm">
+      <label for="breadType">نوع نان:</label>
+      <select id="breadType" required>
+        <option value="اگردک">اگردک</option>
+        <option value="نان شیرمال">نان شیرمال</option>
+        <option value="نان شیر">نان شیر</option>
+      </select>
+
+      <label for="quantity">تعداد نان:</label>
+      <input type="number" id="quantity" min="1" required>
+
+      <label for="phone">شماره موبایل:</label>
+      <input type="text" id="phone" required>
+
+      <div class="message" id="message"></div>
+
+      <button type="submit">ثبت سفارش</button>
+    </form>
+
+    
+<div class="gallery">
+  <h3>نمونه‌کارها</h3>
+
+  <div style="margin-bottom: 20px;">
+    <h4>اگردک تازه</h4>
+    <img src="agerdak.jpg" alt="نمونه نان اگردک" style="width: 200px; border-radius: 10px;">
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h4>نان شیرمال</h4>
+    <img src="shirmal.jpg" alt="نمونه نان شیرمال" style="width: 200px; border-radius: 10px;">
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h4>نان شیر</h4>
+    <img src="naneshire.jpg" alt="نمونه نان شیر" style="width: 200px; border-radius: 10px;">
+  </div>
+</div>
+
+
+
+
+
+
+    <div class="admin-link">
+      <button onclick="showLogin()">ورود مدیر</button>
+    </div>
+  </div>
+
+  <div class="container" id="loginPage">
+    <h2>ورود مدیر</h2>
+    <label for="adminPass">رمز عبور:</label>
+    <input type="password" id="adminPass">
+    <div class="message" id="loginMessage"></div>
+    <button onclick="checkPassword()">ورود</button>
+  </div>
+
+  <div class="container" id="adminPage">
+    <h2>سفارش‌های ثبت‌شده</h2>
+    <div class="orders" id="ordersList"></div>
+    <button onclick="goBack()">بازگشت</button>
+  </div>
+
+  <script>
+    const form = document.getElementById('breadForm');
+    const phoneInput = document.getElementById('phone');
+    const message = document.getElementById('message');
+    const ordersKey = 'breadOrders';
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const phone = phoneInput.value.trim();
+      const bread = document.getElementById('breadType').value;
+      const quantity = document.getElementById('quantity').value;
+
+      message.textContent = '';
+
+      if (phone.length !== 11 || !phone.startsWith('09')) {
+        message.textContent = 'مشتری عزیز شماره موبایل وارد شده اشتباه است. لطفا شماره موبایلی معتبر را وارد کنید.';
+        return;
+      }
+
+      const order = {
+        bread,
+        quantity,
+        phone,
+        time: new Date().toLocaleString()
+      };
+
+      let orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
+      orders.push(order);
+      localStorage.setItem(ordersKey, JSON.stringify(orders));
+
+      alert('سفارش شما با موفقیت ثبت شد!');
+      form.reset();
+    });
+
+    function showLogin() {
+      document.getElementById('mainPage').style.display = 'none';
+      document.getElementById('loginPage').style.display = 'block';
+    }
+
+    function checkPassword() {
+      const pass = document.getElementById('adminPass').value;
+      if (pass === 'zanoalma13645992') {
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('adminPage').style.display = 'block';
+        loadOrders();
+      } else {
+        document.getElementById('loginMessage').textContent = 'رمز اشتباه است!';
+      }
+    }
+
+    function loadOrders() {
+      const orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
+      const ordersList = document.getElementById('ordersList');
+      ordersList.innerHTML = '';
+
+      if (orders.length === 0) {
+        ordersList.innerHTML = '<p>هیچ سفارشی ثبت نشده است.</p>';
+        return;
+      }
+
+      orders.forEach((order, index) => {
+        const div = document.createElement('div');
+        div.className = 'order-item';
+        div.innerHTML = `
+          <strong>نوع نان:</strong> ${order.bread}<br>
+          <strong>تعداد:</strong> ${order.quantity}<br>
+          <strong>شماره:</strong> ${order.phone}<br>
+          <strong>زمان ثبت:</strong> ${order.time}<br>
+          <button onclick="deleteOrder(${index})">حذف سفارش</button>
+        `;
+        ordersList.appendChild(div);
+      });
+    }
+
+        function deleteOrder(index) {
+      let orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
+      orders.splice(index, 1);
+      localStorage.setItem(ordersKey, JSON.stringify(orders));
+      loadOrders();
+    }
+
+    function goBack() {
+      document.getElementById('adminPage').style.display = 'none';
+      document.getElementById('mainPage').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
